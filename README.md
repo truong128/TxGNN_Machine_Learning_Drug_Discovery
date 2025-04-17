@@ -7,13 +7,19 @@ Nature Medicine (2024)
 
 1. Installation
 conda create --name txgnn_env python=3.8
+
 conda activate txgnn_env
+
 conda install -c dglteam dgl-cuda{$CUDA_VERSION}==0.5.2 
+
 pip install TxGNN
 
-2. Download/load knowledge graph dataset
+
+3. Download/load knowledge graph dataset
 TxData = TxData(data_folder_path = './data')
+
 TxData.prepare_split(split = 'complex_disease', seed = 42)
+
 TxGNN = TxGNN(data = TxData, 
  weight_bias_track = False,
  proj_name = 'TxGNN', 
@@ -21,7 +27,8 @@ TxGNN = TxGNN(data = TxData,
  device = 'cuda:0' # define your cuda device
  )
 
-3. Initialize a new model
+
+5. Initialize a new model
 
 
 👉 Instead of initializing a new model, you can also load a saved model:
@@ -51,6 +58,7 @@ TxGNN.save_model('./model_ckpt')
 
 
 👉 To evaluate the model on the entire test set using disease-centric evaluation, you can type:
+
 from txgnn import TxEval
 TxEval = TxEval(model = TxGNN)
 result = TxEval.eval_disease_centric(disease_idxs = 'test_set', 
@@ -62,6 +70,7 @@ result = TxEval.eval_disease_centric(disease_idxs = 'test_set',
  
 
 👉 If you want to look at specific disease, you can also do:
+
 result = TxEval.eval_disease_centric(disease_idxs = [9907.0, 12787.0], 
  relation = 'indication', save_result = False)
  
@@ -85,6 +94,9 @@ TxGNN.train_graphmask(relation = 'indication',
  
 
 👉 gates = TxGNN.retrieve_save_gates('SAVED_PATH')
+
 👉 save and load graphmask model as well via:
+
 TxGNN.save_graphmask_model('./graphmask_model_ckpt')
+
 TxGNN.load_pretrained_graphmask('./graphmask_model_ckpt')
