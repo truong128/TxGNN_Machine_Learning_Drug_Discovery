@@ -23,14 +23,18 @@ TxGNN = TxGNN(data = TxData,
 
 3. Initialize a new model
 
+
 👉 Instead of initializing a new model, you can also load a saved model:
 TxGNN.load_pretrained('./model_ckpt')
+
 
 👉 To do pre-training using link prediction for all edge types, you can type:
 TxGNN.pretrain(n_epoch = 2, 
  learning_rate = 1e-3,
  batch_size = 1024, 
  train_print_per_n = 20)
+
+ 
 👉 Lastly, to do finetuning on drug-disease relation with metric learning, you can type:
 TxGNN.finetune(n_epoch = 500, 
  learning_rate = 5e-4,
@@ -40,8 +44,10 @@ TxGNN.finetune(n_epoch = 500,
 -> Output: Testing Loss 0.6381 Testing Micro AUROC 0.7020 Testing Micro AUPRC 0.6851 Testing Macro AUROC 0.6949 Testing Macro AUPRC 0.6878
 ----- AUROC Performance in Each Relation -----
 
+
 👉 To save the trained model, you can type:
 TxGNN.save_model('./model_ckpt')
+
 
 👉 To evaluate the model on the entire test set using disease-centric evaluation, you can type:
 from txgnn import TxEval
@@ -52,6 +58,7 @@ result = TxEval.eval_disease_centric(disease_idxs = 'test_set',
  save_result = True,
  return_raw = False,
  save_name = 'SAVE_PATH')
+ 
 
 👉 If you want to look at specific disease, you can also do:
 result = TxEval.eval_disease_centric(disease_idxs = [9907.0, 12787.0], 
@@ -63,6 +70,8 @@ result = TxEval.eval_disease_centric(disease_idxs = [9907.0, 12787.0],
 5173.0 5173.0         actinic keratosis (disease) [Flumethasone, Aminosalicylic acid, Desoximeta... ...   -1    []     []
 
 [2 rows x 59 columns]
+
+
 👉 After training a satisfying link prediction model, we can also train graph XAI model by:
 TxGNN.train_graphmask(relation = 'indication',
  learning_rate = 3e-4,
@@ -70,6 +79,8 @@ TxGNN.train_graphmask(relation = 'indication',
  epochs_per_layer = 3,
  penalty_scaling = 1,
  valid_per_n = 20)
+
+ 
 
 👉 gates = TxGNN.retrieve_save_gates('SAVED_PATH')
 👉 save and load graphmask model as well via:
