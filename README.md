@@ -17,6 +17,7 @@ pip install TxGNN
 
 
 3. Download/load knowledge graph dataset
+
 TxData = TxData(data_folder_path = './data')
 
 TxData.prepare_split(split = 'complex_disease', seed = 42)
@@ -33,10 +34,12 @@ TxGNN = TxGNN(data = TxData,
 
 
 👉 Instead of initializing a new model, you can also load a saved model:
+
 TxGNN.load_pretrained('./model_ckpt')
 
 
 👉 To do pre-training using link prediction for all edge types, you can type:
+
 TxGNN.pretrain(n_epoch = 2, 
  learning_rate = 1e-3,
  batch_size = 1024, 
@@ -44,6 +47,7 @@ TxGNN.pretrain(n_epoch = 2,
 
  
 👉 Lastly, to do finetuning on drug-disease relation with metric learning, you can type:
+
 TxGNN.finetune(n_epoch = 500, 
  learning_rate = 5e-4,
  train_print_per_n = 5,
@@ -55,13 +59,16 @@ TxGNN.finetune(n_epoch = 500,
 
 
 👉 To save the trained model, you can type:
+
 TxGNN.save_model('./model_ckpt')
 
 
 👉 To evaluate the model on the entire test set using disease-centric evaluation, you can type:
 
 from txgnn import TxEval
+
 TxEval = TxEval(model = TxGNN)
+
 result = TxEval.eval_disease_centric(disease_idxs = 'test_set', 
  show_plot = False, 
  verbose = True, 
@@ -85,6 +92,7 @@ result = TxEval.eval_disease_centric(disease_idxs = [9907.0, 12787.0],
 
 
 👉 After training a satisfying link prediction model, we can also train graph XAI model by:
+
 TxGNN.train_graphmask(relation = 'indication',
  learning_rate = 3e-4,
  allowance = 0.005,
