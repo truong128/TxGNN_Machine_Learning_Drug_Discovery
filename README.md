@@ -41,6 +41,7 @@ TxGNN.finetune(n_epoch = 500,
  train_print_per_n = 5,
  valid_per_n = 20,
  save_name = finetune_result_path)
+ 
 -> Output: Testing Loss 0.6381 Testing Micro AUROC 0.7020 Testing Micro AUPRC 0.6851 Testing Macro AUROC 0.6949 Testing Macro AUPRC 0.6878
 ----- AUROC Performance in Each Relation -----
 
@@ -63,6 +64,7 @@ result = TxEval.eval_disease_centric(disease_idxs = 'test_set',
 👉 If you want to look at specific disease, you can also do:
 result = TxEval.eval_disease_centric(disease_idxs = [9907.0, 12787.0], 
  relation = 'indication', save_result = False)
+ 
 -> Output will be: 
 >>> result
  ID                     Name                    Ranked List ... AP@100 Hits@100 Missed@100
